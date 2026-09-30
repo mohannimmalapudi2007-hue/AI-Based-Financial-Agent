@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+output.csv
+sample_output.csv
+*.log
+dataset/image_overview.png
+dataset/media/images/view_image_*.png
+.streamlit/
