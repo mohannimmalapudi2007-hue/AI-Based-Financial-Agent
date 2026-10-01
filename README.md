@@ -1,193 +1,728 @@
-# HackerRank Orchestrate
+# 💰 AI-Based Financial Agent
 
-Starter repository for the **HackerRank Orchestrate** 24-hour hackathon (September 2026).
+> **An intelligent financial decision-support system that helps users determine whether they can safely afford an expense.**
 
-## Buy or Wait?
+The **AI-Based Financial Agent** goes beyond checking a user's current balance. It analyzes income, recurring expenses, pending payments, essential spending, minimum balance requirements, payment preferences, available payment options, and relevant financial information to provide a personalized recommendation.
 
-Build an AI-powered financial agent that decides whether a user can safely afford a requested expense.
+For example:
 
-A user may ask: **"Can I afford this laptop?"**
+> 💬 **"Can I afford this laptop?"**
 
-Answering well takes more than the current balance. The agent must account for recurring expenses, pending payments, essential spending, confirmed income, available payment options, and relevant details buried in messages and images.
-
-For every request, the agent decides whether the user should pay in full, pay partially, use installments, wait, or not proceed. The recommendation must be personalized: two users with the same balance can deserve different answers based on their commitments, priorities, payment preferences, and willingness to adjust flexible expenses.
-
-A recommendation is safe only if the user can complete the full payment plan, cover essential expenses, and stay above their preferred minimum balance throughout the forecast period.
-
-Read [`problem_statement.md`](./problem_statement.md) for the full task spec, input/output schema, allowed values, conflict-resolution rules, and submission format.
+The agent evaluates the user's financial situation and determines whether they should **pay in full, pay partially, use installments, wait, or not proceed**.
 
 ---
 
-## Quick Start
+## 🚀 Key Features
 
-Clone the repository and move into the project directory:
+### 💳 Smart Affordability Analysis
 
-```bash
-git clone https://github.com/interviewstreet/hackerrank-orchestrate-september26.git
-cd hackerrank-orchestrate-september26
-```
+The agent calculates the maximum amount a user can safely spend while maintaining their required minimum balance and covering upcoming financial commitments.
 
-Build your solution in `code/main.py`, or use another language and document its entry point clearly.
+### 📊 Financial Forecasting
 
-Your solution must:
+The system forecasts the user's financial timeline by considering:
 
-- Read the input files from `dataset/`
-- Generate one prediction for every request
-- Write the final predictions to `output.csv` in the repository root
+* 💰 Current available balance
+* 💵 Confirmed income
+* 🔄 Recurring expenses
+* 🧾 Pending payments
+* ⭐ Essential expenses
+* 🏦 Minimum balance requirements
+* 📅 Future financial events
 
-Run the starter Python entry point with:
+### 🧠 Personalized Recommendations
 
-```bash
-python3 code/main.py
-```
+Recommendations are based on each user's individual financial profile, commitments, priorities, payment preferences, and flexibility.
 
-After running your solution, confirm that `output.csv` exists in the repository root and contains the required columns and one row for every request.
+Possible recommendations include:
 
-## Important File Locations
+| Recommendation         | Meaning                                                                |
+| ---------------------- | ---------------------------------------------------------------------- |
+| 💵 **Full Payment**    | The expense can safely be paid in full                                 |
+| 💳 **Partial Payment** | A safe portion can be paid now and the remaining amount later          |
+| 📆 **Installments**    | The expense can be completed using an available installment plan       |
+| ⏳ **Wait**             | The expense becomes affordable at a later date                         |
+| 🚫 **Not Recommended** | The expense cannot be completed safely under the available constraints |
+
+### 🔍 Financial Evidence
+
+The system can work with supporting financial information from:
+
+* 💬 User messages
+* 🖼️ Financial images
+* 📄 Statements
+* 🧾 Bills and receipts
+* 💼 Payment options
+
+### 🤖 AI Financial Chatbot
+
+The dashboard includes an interactive chatbot that allows users to ask natural-language questions about their financial requests.
+
+Examples:
 
 ```text
-dataset/        Input data and the blank output template. Do not modify the input data.
-code/           Your solution code.
-output.csv      Final generated predictions in the repository root.
-code.zip        ZIP file containing your complete solution for submission.
+Can I afford this laptop?
+
+How much can I safely spend?
+
+Should I wait or use installments?
+
+How many requests are affordable now?
+
+What payment method is recommended?
 ```
 
-The blank template at `dataset/output.csv` is provided as a reference. Your final generated file must be the root-level `output.csv`.
+### 📈 Interactive Dashboard
+
+The Streamlit dashboard provides:
+
+* 📊 Financial overview
+* 💰 Affordability statistics
+* 💳 Payment-method analysis
+* 🔎 Request search
+* 📋 Detailed request analysis
+* 🤖 AI chatbot
+* 📥 Filtered report download
 
 ---
 
-## Repository Layout
+# 🏗️ System Architecture
 
 ```text
-.
-├── AGENTS.md                         # Rules for AI coding tools + transcript logging
-├── problem_statement.md              # Full challenge statement
-├── README.md                         # You are here
-├── code/                             # Your solution code
-├── output.csv                        # Final generated predictions
-└── dataset/
-    ├── requests.csv                  # 250 requests to evaluate — predict these
-    ├── output.csv                    # Blank submission template
-    ├── sample_requests.csv           # 25 solved examples
-    ├── financial_profiles.csv        # Balances, minimum balance, priorities, preferences
-    ├── financial_events.csv          # Historical, pending, and confirmed transactions
-    ├── request_payment_options.csv   # Payment options available per request
-    ├── exchange_rates.csv            # Fixed, dated conversion rates
-    ├── messages.csv                  # Messages tied to users, requests, or events
-    ├── images.csv                    # Payroll letters, statements, bills, receipts
-    └── media/
-        └── images/
+                       👤 USER
+                           │
+                           │ Financial Question
+                           ▼
+                 🤖 AI FINANCIAL AGENT
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+   👤 Financial       💳 Payment       💬 Messages
+      Profile            Options          & Images
+          │                │                │
+          └────────────────┼────────────────┘
+                           ▼
+                  🧠 Financial Analysis
+                           │
+             ┌─────────────┼─────────────┐
+             ▼             ▼             ▼
+        💰 Balance     📅 Forecast    🛡️ Safety
+          Analysis       Timeline        Checks
+             │             │             │
+             └─────────────┼─────────────┘
+                           ▼
+                  📊 Decision Engine
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+       Pay Now         Pay Later      Payment Plan
+          │                │                │
+          └────────────────┼────────────────┘
+                           ▼
+                  🤖 Recommendation
+                           │
+                           ▼
+                 📊 Streamlit Dashboard
+                           │
+                           ▼
+                     💬 AI Chatbot
 ```
 
-Only `dataset/requests.csv` requires predictions. Everything else is context. Join user records with `user_id`, request records with `request_id`, supporting evidence with `related_event_id`, and exchange rates with the rate date and currency pair.
+---
 
-Amounts are in the user's `home_currency` — the dataset uses INR, ZAR, IDR, USD, and EUR, and every conversion rate you need is in `exchange_rates.csv`. All dates are `YYYY-MM-DD`. Live exchange rates, market data, and banking access are not required.
+# 🔄 How It Works
+
+### 1️⃣ User Request
+
+The system receives a financial request such as:
+
+> **"Can I afford this laptop?"**
+
+Each request contains information such as the requested amount, request date, desired completion date, and partial-payment preference.
+
+### 2️⃣ User Financial Profile
+
+The agent retrieves the user's financial profile, including:
+
+* Current balance
+* Minimum balance to maintain
+* Home currency
+* Financial priorities
+* Spending preferences
+* Accepted payment methods
+
+### 3️⃣ Financial Events
+
+The system analyzes historical and future financial events.
+
+It distinguishes between:
+
+* Income
+* Expenses
+* Recurring transactions
+* Pending transactions
+* Confirmed payments
+* Other financial events
+
+### 4️⃣ Forecast
+
+The agent builds a financial timeline and forecasts the user's balance over the required period.
+
+The system checks whether the balance remains above the user's preferred minimum balance.
+
+### 5️⃣ Payment Options
+
+Available payment options are evaluated, including installment schedules and payment terms.
+
+The system selects an appropriate plan while respecting the user's accepted payment methods.
+
+### 6️⃣ Safety Check
+
+A recommendation is considered safe only when the user can:
+
+* Complete the required payment plan
+* Cover essential expenses
+* Maintain the required minimum balance
+* Complete the purchase within the required deadline
+
+### 7️⃣ Final Recommendation
+
+The agent generates:
+
+* 💰 Maximum safe amount
+* 📊 Affordability status
+* 💳 Recommended payment method
+* 📆 Payment plan
+* 📅 Earliest safe full-payment date
+* 🔄 Required spending changes
+* 🧠 Decision explanation
 
 ---
 
-## What You Need to Build
+# 📊 Dashboard
 
-For every row in `dataset/requests.csv`, produce one row in `output.csv` with:
+The project includes an interactive Streamlit dashboard that provides a high-level view of all financial requests.
 
-| Column | Meaning |
-|---|---|
-| `request_id` | The request being answered |
-| `amount_safe_to_pay` | Largest amount safe to pay on `request_date` before optional spending changes, after protecting essentials and the minimum balance |
-| `affordability_status` | `affordable_now`, `affordable_with_plan`, `affordable_later`, or `not_affordable` |
-| `recommended_payment_method` | `full_payment`, `partial_payment`, `installments`, `wait`, or `not_recommended` |
-| `payment_plan` | Chronological `<YYYY-MM-DD>:<amount>` entries joined by `\|`, or `none` |
-| `earliest_date_for_full_payment` | Earliest date the full amount is forecast safe as one payment; empty if never within the forecast |
-| `spending_changes_needed` | Up to three `stop:<event_id>` / `reduce_to:<event_id>:<amount>` changes joined by `\|`, or `none` |
-| `decision_explanation` | Short explanation and the financial facts behind it |
+It displays:
 
-`0 <= amount_safe_to_pay <= requested_amount` must always hold. Installment plans must exactly match a supplied payment option, and only recurring expenses marked flexible may be changed.
+* Total requests
+* Affordable-now requests
+* Requests affordable with a plan
+* Requests that should be delayed
+* Requests that are not affordable
+* Affordability distribution
+* Recommended payment methods
+* Recommended actions
 
-`affordable_with_plan` means the full request is completed through a partial-payment schedule, installments, or permitted spending changes. Recommend `partial_payment` only when the request allows it, the user accepts it, `0 < amount_safe_to_pay < requested_amount`, and `earliest_date_for_full_payment` is on or before `desired_completion_date`. Use exactly two payments: pay `amount_safe_to_pay` on `request_date`, then pay the remaining amount on `earliest_date_for_full_payment`. The two payments must add up to `requested_amount`. Unlike installments, partial payment does not need to match a supplied payment option.
+The dashboard gives users a quick visual understanding of the overall financial decision results.
 
 ---
 
-## Suggested Workflow
+# 🔎 Request Analysis
 
-1. Inspect `dataset/sample_requests.csv` — 25 requests with completed output columns — to understand the expected format and decision style.
-2. Reconstruct each user's financial state from `financial_profiles.csv` and `financial_events.csv`: separate recurring expenses from one-time events, reserve pending transactions, count confirmed salary only on its settlement date, and de-duplicate repeated representations of the same event.
-3. When an event has a blank `amount`, find its `event_id` as `related_event_id` in `images.csv` and extract the amount from the linked image. Never treat a blank amount as zero. Pull in any other relevant messages, images, and payment options for the request.
-4. Forecast forward and generate a plan that keeps the balance above the minimum at every step.
-5. Verify deterministically — bounds, plan feasibility, schedule match, flexible-only spending changes — before writing `output.csv`.
-6. Score yourself on the solved samples, then run the full dataset.
+The **Request Analysis** section allows users to search and inspect individual financial requests.
 
-You may use any language or runtime. Python, JavaScript, and TypeScript are all reasonable choices.
+Users can:
 
----
+* 🔍 Search by Request ID
+* 📋 View the generated prediction
+* 💰 Check the safe amount
+* 📊 View affordability status
+* 💳 View the recommended payment method
+* 📅 Check the earliest full-payment date
+* 🔄 View required spending changes
+* 📥 Download the filtered report
 
-## Requirements
-
-Your solution must:
-
-- be runnable from the terminal
-- read the provided files from `dataset/`
-- produce a valid `output.csv` with the exact required columns in the exact required order
-- include one prediction for every `request_id` in `dataset/requests.csv`
-- not use organizer-only files or hardcoded labels
-- keep behavior deterministic where possible
-
-If you use API keys or secrets, read them from environment variables. Never hardcode secrets in the repo.
+This section makes it easier to move from the overall dashboard statistics to a specific financial request.
 
 ---
 
-## Evaluation
+# 📋 Request Details
 
-Your `output.csv` will be compared against hidden ground-truth values.
+The **Request Details** section provides a deeper view of an individual request.
 
-The scoring will consider:
+For the selected request, the dashboard displays:
 
-- accuracy of `amount_safe_to_pay`
-- correctness of `affordability_status`
-- correctness of `recommended_payment_method` and `payment_plan`
-- accuracy of `earliest_date_for_full_payment`
-- validity of `spending_changes_needed`
-- usefulness and consistency of `decision_explanation`
+* 🆔 Request ID
+* 💰 Safe amount
+* 💳 Recommended payment method
+* 📊 Affordability status
+* 📅 Earliest full-payment date
+* 🔄 Spending changes
+* 💵 Payment plan
+* 🎯 AI confidence
+* 🧠 Decision information
 
-### Token Usage And Cost Analysis
+This provides a detailed explanation of how the financial decision applies to a specific request.
 
-Your `code.zip` must include one token-usage file:
+---
+
+# 🧮 Decision Outputs
+
+For every financial request, the system produces:
 
 ```text
-evaluation/usage_report.md
+amount_safe_to_pay
+affordability_status
+recommended_payment_method
+payment_plan
+earliest_date_for_full_payment
+spending_changes_needed
+decision_explanation
 ```
 
-The report must cover model providers and names, model calls, input and output tokens, total and average tokens per request, estimated total and per-request cost. The reported values must correspond to the final full-dataset run that produced your `output.csv`.
+The affordability status can be:
+
+```text
+affordable_now
+affordable_with_plan
+affordable_later
+not_affordable
+```
+
+The recommended payment method can be:
+
+```text
+full_payment
+partial_payment
+installments
+wait
+not_recommended
+```
 
 ---
 
-## Chat Transcript Logging
+# 🛠️ Technology Stack
 
-This repo includes an [`AGENTS.md`](./AGENTS.md) file for AI coding tools. It asks compatible tools to append conversation summaries to a `log.txt` in the repository root — the same directory as `AGENTS.md`:
+## 🐍 Backend & Financial Decision Logic
 
-| Platform | Path |
-|---|---|
-| macOS / Linux | `<repo root>/log.txt` |
-| Windows | `<repo root>\log.txt` |
+* Python
+* Pandas
+* Financial forecasting and decision logic
+* Currency conversion
+* Pytest
 
-The path resolves relative to `AGENTS.md`, so it stays correct across clones, renames, and checkouts. `log.txt` is gitignored — upload it as your chat transcript at submission time. Do not paste secrets into the chat.
+## 📊 Dashboard
 
-In case, the harness you are using is not in the repo root, you can explicitly ask the agent to look for the AGENTS.md in this folder & then continue.
+* Streamlit
+* Plotly
+
+## 📁 Data
+
+* CSV-based financial datasets
+* Financial profiles
+* Financial events
+* Payment options
+* Exchange rates
+* Messages
+* Supporting images
+
+## 🧰 Development Tools
+
+* Git
+* GitHub
+* VS Code
+* Python Virtual Environment
 
 ---
 
-## Submission
+# 📁 Project Structure
 
-Submit the following files as instructed by HackerRank:
+```text
+AI-Based-Financial-Agent/
+│
+├── 📂 code/
+│   ├── balance_calculator.py
+│   ├── currency_converter.py
+│   ├── data_loader.py
+│   ├── event_classifier.py
+│   ├── event_date_handler.py
+│   ├── event_lookup.py
+│   ├── financial_timeline.py
+│   ├── forecast_window.py
+│   ├── inspect_dataset.py
+│   ├── main.py
+│   ├── minimum_balance_checker.py
+│   ├── profile_lookup.py
+│   ├── ui.py
+│   │
+│   └── 🧪 test_*.py
+│
+├── 📂 dataset/
+│   ├── requests.csv
+│   ├── sample_requests.csv
+│   ├── financial_profiles.csv
+│   ├── financial_events.csv
+│   ├── request_payment_options.csv
+│   ├── exchange_rates.csv
+│   ├── messages.csv
+│   ├── images.csv
+│   └── 📂 media/
+│
+├── 📂 docs/
+│   └── 📂 screenshots/
+│       ├── dashboard-overview.png
+│       ├── request-analysis.png
+│       └── request-details.png
+│
+├── 📄 problem_statement.md
+├── 📄 requirements.txt
+├── 📄 output.csv
+├── 📄 .gitignore
+└── 📄 README.md
+```
 
-| File | Description |
-|---|---|
-| `code.zip` | Full runnable solution, prompts/configuration, README, and the required `evaluation/` folder |
-| `output.csv` | Predictions for every row in `dataset/requests.csv` |
-| `chat_transcript` | The `log.txt` described above, showing how you developed or used the system |
+---
 
-Before submitting, confirm:
+# ⚙️ Installation
 
-- `output.csv` has one row per row in `dataset/requests.csv` (250 rows plus the header).
-- `output.csv` has the exact required columns in the exact required order.
-- Every `amount_safe_to_pay` satisfies `0 <= amount_safe_to_pay <= requested_amount`.
-- Every installment plan matches a supplied payment option, and every spending change targets a flexible recurring expense.
-- Your runnable code, setup instructions, and `evaluation/` folder are included in `code.zip`.
+## 1️⃣ Clone the Repository
+
+```powershell
+git clone <your-repository>
+cd AI-Based-Financial-Agent
+```
+
+## 2️⃣ Create a Virtual Environment
+
+On Windows:
+
+```powershell
+python -m venv .venv
+```
+
+Activate it:
+
+```powershell
+.venv\Scripts\activate
+```
+
+## 3️⃣ Install Dependencies
+
+```powershell
+pip install -r requirements.txt
+```
+
+---
+
+# ▶️ Run the Financial Agent
+
+Generate predictions for the complete dataset:
+
+```powershell
+python code\main.py --requests-file dataset\requests.csv --output output.csv
+```
+
+The system generates predictions for all requests and saves them to:
+
+```text
+output.csv
+```
+
+---
+
+# 📊 Run the Dashboard
+
+Start the interactive Streamlit dashboard:
+
+```powershell
+streamlit run code\ui.py
+```
+
+The dashboard will open in the browser and provide an interactive interface for exploring the financial predictions.
+
+---
+
+# 🤖 Using the AI Chatbot
+
+Click the **💬 chatbot button** in the dashboard.
+
+You can ask questions such as:
+
+```text
+Can I afford this laptop?
+
+How much can I safely spend?
+
+Should I wait?
+
+Should I use installments?
+
+How many requests are affordable now?
+
+What payment method is recommended?
+```
+
+The chatbot uses the financial prediction data to provide relevant answers about the available requests and recommendations.
+
+---
+
+# 🧪 Testing
+
+The project includes automated tests for the major financial components.
+
+Run:
+
+```powershell
+python -m pytest -q
+```
+
+Current test status:
+
+```text
+30 passed
+```
+
+The tests cover important components such as:
+
+* Balance calculations
+* Currency conversion
+* Event classification
+* Event date handling
+* Event lookup
+* Financial timeline
+* Forecast window
+* Minimum balance checking
+* Profile lookup
+* Main financial decision logic
+
+---
+
+# 📈 Current Dataset
+
+The project processes:
+
+```text
+250 financial requests
+```
+
+The generated output contains one prediction for each request.
+
+The system evaluates:
+
+* Affordability
+* Safe spending amount
+* Payment methods
+* Payment plans
+* Future affordability
+* Spending adjustments
+* Decision explanations
+
+### Current Affordability Results
+
+| Status                  | Requests |
+| ----------------------- | -------: |
+| 💰 Affordable Now       |       70 |
+| 💳 Affordable With Plan |       65 |
+| ⏳ Affordable Later      |       38 |
+| 🚫 Not Affordable       |       77 |
+| **Total**               |  **250** |
+
+### Recommended Payment Methods
+
+| Payment Method     | Requests |
+| ------------------ | -------: |
+| 🚫 Not Recommended |       77 |
+| 💵 Full Payment    |       70 |
+| 💳 Installments    |       61 |
+| ⏳ Wait             |       38 |
+| 💰 Partial Payment |        4 |
+
+---
+
+# 🔐 Financial Safety Principles
+
+The agent is designed around financial safety rather than simply checking whether the current balance is large enough.
+
+A recommendation must consider the user's:
+
+```text
+Current Balance
+      +
+Confirmed Income
+      -
+Recurring Expenses
+      -
+Pending Payments
+      -
+Essential Spending
+      -
+Required Minimum Balance
+      ↓
+Safe Financial Capacity
+```
+
+The system therefore avoids making a recommendation solely from the user's current balance.
+
+---
+
+# 🧠 Decision-Making Process
+
+The financial decision engine follows a structured process:
+
+```text
+1. Read User Request
+          ↓
+2. Load Financial Profile
+          ↓
+3. Analyze Financial Events
+          ↓
+4. Identify Income & Expenses
+          ↓
+5. Build Financial Timeline
+          ↓
+6. Apply Minimum Balance Protection
+          ↓
+7. Calculate Safe Spending Amount
+          ↓
+8. Evaluate Payment Options
+          ↓
+9. Determine Affordability Status
+          ↓
+10. Generate Recommendation
+          ↓
+11. Explain the Decision
+```
+
+This approach allows the system to produce an explainable financial recommendation rather than relying only on a single balance value.
+
+---
+
+# 🎯 Example
+
+### 👤 User
+
+> 💬 **Can I afford this laptop?**
+
+### 🧠 Agent Analysis
+
+```text
+Requested Amount:        ₹80,000
+Safe Amount Today:       ₹35,000
+Affordability:           Affordable With Plan
+Recommended Method:      Installments
+```
+
+### 🤖 Recommendation
+
+```text
+💳 Use an available installment plan.
+
+The full amount cannot be safely paid immediately
+while maintaining the required minimum balance and
+covering upcoming financial commitments.
+```
+
+---
+
+# 📥 Output File
+
+The financial agent generates an `output.csv` file containing the prediction for each request.
+
+The output includes:
+
+```text
+request_id
+amount_safe_to_pay
+affordability_status
+recommended_payment_method
+payment_plan
+earliest_date_for_full_payment
+spending_changes_needed
+decision_explanation
+```
+
+This output can be used for:
+
+* 📊 Dashboard visualization
+* 🔎 Request-level analysis
+* 📥 Report generation
+* 🤖 Chatbot responses
+* 🧪 Evaluation and testing
+
+---
+
+# 🌟 Project Highlights
+
+* ✅ Personalized financial affordability analysis
+* ✅ Financial forecasting
+* ✅ Recurring expense handling
+* ✅ Pending and confirmed transaction analysis
+* ✅ Minimum-balance protection
+* ✅ Payment-plan evaluation
+* ✅ Currency conversion
+* ✅ Interactive Streamlit dashboard
+* ✅ Request-level financial analysis
+* ✅ Natural-language chatbot
+* ✅ Filtered report download
+* ✅ Automated testing
+* ✅ CSV prediction generation
+* ✅ Explainable financial decision logic
+
+---
+
+# 🔮 Future Enhancements
+
+Potential future improvements include:
+
+* 🧠 LLM-powered financial conversations
+* 📸 Automated OCR for financial documents and receipts
+* 🔊 Voice-based financial queries
+* 📱 Mobile application
+* 🔔 Smart payment reminders
+* 📉 Advanced spending trend analysis
+* 🔐 Stronger authentication and data privacy
+* 📊 Personalized financial insights
+* 💡 Budget recommendations
+* ☁️ Cloud deployment
+* 🤖 More advanced agentic financial workflows
+
+---
+
+# 👨‍💻 Author
+
+## Mohan Nimmalapudi
+
+**AI & Machine Learning Enthusiast | Developer**
+
+GitHub:
+
+```text
+mohannimmalapudi2007-hue
+```
+
+---
+
+# 🎯 Project Goal
+
+The goal of the **AI-Based Financial Agent** is to make financial decisions more understandable and personalized by transforming complex financial information into a clear and explainable recommendation.
+
+Instead of simply asking:
+
+> **"Do I have enough money?"**
+
+the system asks:
+
+> **"Can I safely afford this expense while protecting my future financial commitments?"**
+
+---
+
+# ⭐ Final Summary
+
+The **AI-Based Financial Agent** combines financial data analysis, forecasting, affordability checks, payment-plan evaluation, and an interactive dashboard into a single decision-support system.
+
+It helps users understand:
+
+```text
+💰 How much can I safely spend?
+          ↓
+📊 Can I afford the requested expense?
+          ↓
+💳 Which payment method is suitable?
+          ↓
+📅 If not now, when can I afford it?
+          ↓
+🧠 Why did the system make this recommendation?
+```
+
+> **Don't just ask "Can I afford it?" — understand whether you can afford it safely.** 💰🤖
